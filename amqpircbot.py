@@ -69,7 +69,7 @@ readbuffer=""
 joined=False
 spoolproc=None
 scriptdir=os.path.dirname(os.path.realpath(__file__))
-if options.ignore =! None:
+if options.ignore != None:
     spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -I %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.ignore)
 else:
     spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange)
