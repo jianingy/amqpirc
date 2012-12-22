@@ -30,6 +30,7 @@ parser.add_option("-p", "--amqppass", dest="password", metavar="password", help=
 parser.add_option("-e", "--amqpexchange", dest="exchange", metavar="exchange", default="myexchange", help="The AMQP exchange name (default 'myexchange')")
 parser.add_option("-r", "--routingkey", dest="routingkey", metavar="routingkey", default="#", help="The AMQP routingkey to listen for (default '#')")
 parser.add_option("-s", "--amqpspoolpath", dest="amqpspoolpath", metavar="amqpspoolpath", default="/var/spool/amqpirc/", help="The path of the spool folder (default: '/var/spool/amqpirc/')")
+parser.add_option("-I", "--ignore", dest="ignore", metavar="ignore", help="Ignore messages where the routingkey begins with this")
 options, args = parser.parse_args()
 
 ### Function to output to the console with a timestamp
@@ -62,6 +63,8 @@ consoleoutput("Waiting for messages matching routingkey %s. To exit press CTRL+C
 
 ### This function is called whenever a message is received
 def process_message(ch, method, properties, body):
+    if options.ignore != None and str(method.routing_key).startswith(options.ignore):
+        return
     tid="%f-" % time.time()
     fd, filename = tempfile.mkstemp(dir=options.amqpspoolpath,prefix=tid)
     f = os.fdopen(fd, 'wt')

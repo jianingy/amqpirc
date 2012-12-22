@@ -49,6 +49,7 @@ parser.add_option("-p", "--amqppass", dest="password", metavar="password", help=
 parser.add_option("-e", "--amqpexchange", dest="exchange", metavar="exchange", default="myexchange", help="The AMQP exchange name (default 'myexchange')")
 parser.add_option("-r", "--routingkey", dest="routingkey", metavar="routingkey", default="#", help="The AMQP routingkey to listen for (default '#')")
 parser.add_option("-s", "--amqpspoolpath", dest="amqpspoolpath", metavar="amqpspoolpath", default="/var/spool/amqpirc/", help="The path of the spool folder (default: '/var/spool/amqpirc/')")
+parser.add_option("-I", "--ignore", dest="ignore", metavar="ignore", help="Ignore messages where the routingkey begins with this")
 
 ### get options
 options, args = parser.parse_args()
@@ -68,7 +69,10 @@ readbuffer=""
 joined=False
 spoolproc=None
 scriptdir=os.path.dirname(os.path.realpath(__file__))
-spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange)
+if options.ignore =! None:
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -I %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.ignore)
+else:
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange)
 spoolcommandlist = spoolcommand.split()
 ircq = deque()
 joinsent=False
@@ -99,9 +103,9 @@ def queuesend():
             sys.exit(1)
 
 def joinchannel(channel=options.ircchannel):
+    global joinsent
     if not joinsent:
         consoleoutput("Joining channel %s" % options.ircchannel)
-        global joinsent
         ircsend("JOIN %s" % channel)
         joinsent=True
 
