@@ -46,7 +46,7 @@ if not os.access(options.amqpspoolpath, os.R_OK) or not os.access(options.amqpsp
 
 ### Connect to ampq and open channel
 try:
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host=options.amqpserver,vhost=options.amqpvhost,credentials=pika.PlainCredentials(options.user, options.password)))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=options.amqpserver,virtual_host=options.amqpvhost,credentials=pika.PlainCredentials(options.user, options.password)))
     channel = connection.channel()
 except:
     consoleoutput("Unable to connect to AMQP and open channel, error: %s" % sys.exc_info()[0])
