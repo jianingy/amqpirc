@@ -28,7 +28,7 @@ parser.add_option("-a", "--amqphost", dest="amqpserver", metavar="amqpserver", d
 parser.add_option("-u", "--amqpuser", dest="user", metavar="user", help="The AMQP username")
 parser.add_option("-p", "--amqppass", dest="password", metavar="password", help="The AMQP password (omit for password prompt)")
 parser.add_option("-e", "--amqpexchange", dest="exchange", metavar="exchange", default="myexchange", help="The AMQP exchange name (default 'myexchange')")
-parser.add_option("-v", "--amqpvhost", dest="vhost", metavar="vhost", default='/', help="AMQP vhost (default '/')")
+parser.add_option("-v", "--amqpvhost", dest="amqpvhost", metavar="amqpvhost", default='/', help="AMQP vhost (default '/')")
 parser.add_option("-r", "--routingkey", dest="routingkey", metavar="routingkey", default="#", help="The AMQP routingkey to listen for (default '#')")
 parser.add_option("-s", "--amqpspoolpath", dest="amqpspoolpath", metavar="amqpspoolpath", default="/var/spool/amqpirc/", help="The path of the spool folder (default: '/var/spool/amqpirc/')")
 parser.add_option("-I", "--ignore", dest="ignore", metavar="ignore", help="Ignore messages where the routingkey begins with this")
