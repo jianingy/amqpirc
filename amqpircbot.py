@@ -47,6 +47,7 @@ parser.add_option("-a", "--amqphost", dest="amqpserver", metavar="amqpserver", d
 parser.add_option("-u", "--amqpuser", dest="user", metavar="user", help="The AMQP username")
 parser.add_option("-p", "--amqppass", dest="password", metavar="password", help="The AMQP password (omit for password prompt)")
 parser.add_option("-e", "--amqpexchange", dest="exchange", metavar="exchange", default="myexchange", help="The AMQP exchange name (default 'myexchange')")
+parser.add_option("-v", "--amqpvhost", dest="vhost", metavar="vhost", default='/', help="AMQP vhost (default '/')")
 parser.add_option("-r", "--routingkey", dest="routingkey", metavar="routingkey", default="#", help="The AMQP routingkey to listen for (default '#')")
 parser.add_option("-s", "--amqpspoolpath", dest="amqpspoolpath", metavar="amqpspoolpath", default="/var/spool/amqpirc/", help="The path of the spool folder (default: '/var/spool/amqpirc/')")
 parser.add_option("-I", "--ignore", dest="ignore", metavar="ignore", help="Ignore messages where the routingkey begins with this")
@@ -70,9 +71,9 @@ joined=False
 spoolproc=None
 scriptdir=os.path.dirname(os.path.realpath(__file__))
 if options.ignore != None:
-    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -I %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.ignore)
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s -I %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost,options.ignore)
 else:
-    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange)
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost)
 spoolcommandlist = spoolcommand.split()
 ircq = deque()
 joinsent=False

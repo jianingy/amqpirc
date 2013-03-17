@@ -50,6 +50,8 @@ Example usage:
                             The AMQP password (omit for password prompt)
       -e exchange, --amqpexchange=exchange
                             The AMQP exchange name (default 'myexchange')
+      -v vhost, --amqpvhost=vhost
+                            The AMQP vhost (default '/')
       -r routingkey, --routingkey=routingkey
                             The AMQP routingkey to listen for (default '#')
       -s amqpspoolpath, --amqpspoolpath=amqpspoolpath
