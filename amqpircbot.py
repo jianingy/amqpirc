@@ -71,9 +71,9 @@ joined=False
 spoolproc=None
 scriptdir=os.path.dirname(os.path.realpath(__file__))
 if options.ignore != None:
-    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s -I %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost,options.ignore)
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s -I %s -s %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost,options.ignore,options.amqpspoolpath)
 else:
-    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost)
+    spoolcommand = "%s/amqpircspool.py -a %s -u %s -p %s -e %s -v %s -s %s" % (scriptdir,options.amqpserver,options.user,options.password,options.exchange,options.amqpvhost,options.amqpspoolpath)
 spoolcommandlist = spoolcommand.split()
 ircq = deque()
 joinsent=False
